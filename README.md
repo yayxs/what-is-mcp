@@ -68,6 +68,43 @@ claude mcp add airtable --env AIRTABLE_API_KEY=YOUR_KEY -- npx -y airtable-mcp-s
 • 通过 ‎`--env` 注入 API 密钥
 • ‎`--` 后使用 ‎`npx` 拉起社区提供的 ‎`airtable-mcp-server` 包。
 
+## SSE (Server-Sent Events)  server
+
+streaming connections SSE（服务器发送事件）服务器提供实时流式连接。许多云服务都使用它来实现实时更新
+
+SSE（Server-Sent Events）是一种基于 HTTP 的协议，允许服务器主动向客户端推送实时数据。与 WebSocket 不同，SSE 是单向的：服务器可以持续不断地向客户端发送事件，而客户端只能接收，不能主动发送数据回服务器。SSE 常用于需要实时更新的场景，比如消息通知、数据监控等。
+
+SSE server 让 Claude Code 能够实时接收外部工具或服务的推送数据，比如项目管理、监控、支付等云服务。
+
+claude mcp add --transport sse <name> <url>
+
+`--transport sse`：指定使用 SSE 协议。
+
+‎`<name>`：为你的 server 取一个名字（如 linear、asana）。
+
+`<url>`：SSE server 的地址。
+
+常见用法 ￼
+ • 实时获取项目管理工具（如 Linear、Asana、Monday）的任务更新。
+ • 实时监控支付、金融服务（如 Plaid、Square）的数据流。
+ • 实时接收设计、媒体服务（如 invideo）的推送内容。
+
+其他注意事项 ￼
+ • 许多云服务的 SSE server 需要认证（如 OAuth 2.0），可以通过 ‎`/mcp` 命令在 Claude Code 内完成认证流程。
+ • 可以用 ‎`claude mcp list` 查看已配置的 server，用 ‎`claude mcp remove <name>` 删除 server。
+
+## HTTP Server
+
+HTTP 服务器使用标准的请求/响应模式。大多数 REST API 和 Web 服务都使用此传输。
+
+claude mcp list
+
+claude mcp get github
+
+claude mcp remove github
+
+/mcp
+
 # Figma
 
 访问设计，导出资源
